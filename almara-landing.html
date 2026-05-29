@@ -189,6 +189,126 @@
       color: rgba(240,230,221,0.6);
       text-align: center;
     }
+
+  /* ─── FORMULÁRIO ─── */
+  .form-section {
+    background: var(--cream);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    gap: 52px;
+  }
+
+  .form-title {
+    font-family: 'SweetSansPro', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.6rem, 1.1vw, 0.85rem);
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--brown-dark);
+    text-align: center;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 860px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 52px;
+  }
+
+  .form-fields {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 36px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-field label {
+    font-family: 'SweetSansPro', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--brown-dark);
+  }
+
+  .form-field input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(56,47,45,0.4);
+    padding: 8px 0 10px;
+    font-family: 'SweetSansPro', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--brown-dark);
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s;
+  }
+
+  .form-field input:focus {
+    border-bottom-color: var(--brown-dark);
+  }
+
+  .form-field input::placeholder {
+    color: rgba(56,47,45,0.35);
+  }
+
+  .form-submit {
+    background: var(--brown-dark);
+    color: var(--cream);
+    border: none;
+    padding: 18px 56px;
+    font-family: 'SweetSansPro', sans-serif;
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .form-submit:hover {
+    background: var(--teal);
+  }
+
+  /* ─── RODAPÉ ─── */
+  footer {
+    background: var(--brown-dark);
+    padding: 48px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'SweetSansPro', sans-serif;
+    font-weight: 300;
+    font-size: 0.6rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: rgba(240,230,221,0.45);
+  }
+
+  .footer-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(240,230,221,0.2);
+    margin: 4px auto;
+  }
   </style>
 </head>
 <body>
@@ -251,6 +371,35 @@
   <p class="location-address">Condomínio Ecoville São Manoel &nbsp;·&nbsp; Sorriso, Mato Grosso</p>
 </section>
 
+<!-- FORMULÁRIO -->
+<section class="form-section">
+  <h2 class="form-title">Tenha acesso exclusivo</h2>
+  <form class="contact-form" id="contactForm">
+    <div class="form-fields">
+      <div class="form-field">
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+      </div>
+      <div class="form-field">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+      </div>
+      <div class="form-field">
+        <label for="phone">Telefone</label>
+        <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000" required>
+      </div>
+    </div>
+    <button type="submit" class="form-submit">Quero saber mais</button>
+  </form>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <p class="footer-brand">Epicentro Empreendimentos</p>
+  <div class="footer-divider"></div>
+  <p class="footer-brand">© 2026 Almara São Manoel</p>
+</footer>
+
 <script>
   const video     = document.getElementById('heroVideo');
   const hero      = document.getElementById('hero');
@@ -280,6 +429,13 @@
   });
 
   video.load();
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    alert('Obrigado, ' + name + '! Em breve nossa equipe entrará em contato.');
+    this.reset();
+  });
 </script>
 </body>
 </html>
