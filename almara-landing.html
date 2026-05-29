@@ -41,8 +41,119 @@
       line-height: 1.6;
       min-height: 100vh;
     }
+
+    /* ─── HERO ─── */
+    .hero-scroll-container {
+      height: 400vh;
+      position: relative;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 12vh;
+      gap: 1.5rem;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3vh;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+
+    .scroll-indicator.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-indicator-line {
+      width: 1px;
+      height: 44px;
+      background: var(--cream);
+      margin: 0 auto;
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.25; transform: scaleY(0.85); }
+      50%       { opacity: 1;    transform: scaleY(1.15); }
+    }
   </style>
 </head>
 <body>
+
+<!-- HERO -->
+<section class="hero-scroll-container" id="hero">
+  <div class="hero-sticky">
+    <video class="hero-video" muted playsinline preload="auto" id="heroVideo">
+      <source src="./VIDEO SITE.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay" id="heroOverlay">
+      <!-- logo e tagline adicionados na próxima task -->
+    </div>
+    <div class="scroll-indicator" id="scrollIndicator">
+      <div class="scroll-indicator-line"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const video     = document.getElementById('heroVideo');
+  const hero      = document.getElementById('hero');
+  const indicator = document.getElementById('scrollIndicator');
+  let ticking = false;
+
+  function updateVideo() {
+    const maxScroll = hero.offsetHeight - window.innerHeight;
+    const progress  = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+
+    if (video.readyState >= 2 && video.duration) {
+      video.currentTime = progress * video.duration;
+    }
+
+    if (window.scrollY > 80) {
+      indicator.classList.add('hidden');
+    } else {
+      indicator.classList.remove('hidden');
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateVideo(); ticking = false; });
+      ticking = true;
+    }
+  });
+
+  video.load();
+</script>
 </body>
 </html>
