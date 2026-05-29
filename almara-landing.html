@@ -309,6 +309,50 @@
     background: rgba(240,230,221,0.2);
     margin: 4px auto;
   }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    .hero-logo {
+      width: clamp(160px, 70vw, 300px);
+    }
+
+    .tagline-sans {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+    }
+
+    .tagline-script {
+      font-size: 1.15rem;
+    }
+
+    .hero-overlay {
+      padding-bottom: 10vh;
+      gap: 1rem;
+    }
+
+    .location-section,
+    .form-section {
+      padding: 60px 24px;
+    }
+
+    .location-map {
+      height: 260px;
+    }
+
+    .form-fields {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 18px 24px;
+    }
+
+    footer {
+      padding: 40px 24px;
+    }
+  }
   </style>
 </head>
 <body>
